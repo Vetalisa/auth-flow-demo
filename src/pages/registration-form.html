@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+<body>
+  <h1>Registration form</h1>
+  <a href="/">Go to main page</a>
+  <br>
+  <a href="/login">Login yourself</a>
+  <form>
+    <label>
+      <p>Login</p>
+      <input id="login" type="text">
+    </label>
+    <label>
+      <p>Password</p>
+      <input id="password" type="password">
+    </label>
+    <label>
+      <p>Repeat password</p>
+      <input id="password-repeat" type="password">
+    </label>
+    <button id="submit-button">
+      Register please
+    </button>
+  </form>
+  <script>
+    const submitButton = document.querySelector("#submit-button")
+    const login = document.querySelector("#login")
+    const password = document.querySelector("#password")
+    const passwordRepeat = document.querySelector("#password-repeat")
+
+    const onSubmit = (e) => {
+      e.preventDefault()
+
+      if (password.value !== passwordRepeat.value) {
+        alert("Passwords does not match!")
+        password.value = ""
+        passwordRepeat.value = ""
+        password.focus()
+        return
+      }
+
+      const credentials = {
+        login: login.value,
+        password: password.value,
+      }
+
+      alert("You are registered!")
+      window.location.pathname = "/"
+    }
+
+    submitButton.addEventListener("click", onSubmit)
+  </script>
+</body>
+</html>
