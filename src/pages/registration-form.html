@@ -5,6 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
+  <style>
+    body {
+      background-color: grey;
+    }
+  </style>
 </head>
 <body>
   <h1>Registration form</h1>
@@ -34,6 +39,16 @@
     const password = document.querySelector("#password")
     const passwordRepeat = document.querySelector("#password-repeat")
 
+    const sendCredential = (credentials) => {
+      return fetch("/registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(credentials)
+      })
+    }
+
     const onSubmit = (e) => {
       e.preventDefault()
 
@@ -50,8 +65,27 @@
         password: password.value,
       }
 
-      alert("You are registered!")
-      window.location.pathname = "/"
+      sendCredential(credentials)
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            throw response.text()
+          }
+        })
+        .then((updatedUsers) => {
+          alert("You are registered!")
+          window.location.pathname = "/"
+        })
+        .catch(errorMessage => {
+          errorMessage.then(text => {
+            alert(text)
+            login.value = ""
+            password.value = ""
+            passwordRepeat.value = ""
+            login.focus()
+          })
+        })
     }
 
     submitButton.addEventListener("click", onSubmit)

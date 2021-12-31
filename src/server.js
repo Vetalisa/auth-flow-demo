@@ -12,15 +12,11 @@ server.listen(port, () => {
   console.log(`Server is running on localhost:${port}`)
 })
 
-pageController(server)
-authController(server)
+const controllers = [
+  pageController,
+  authController,
+]
 
-// databaseService.accessDatabase("users", (databaseData) => {
-//   const user = new UserModel({ login: "tig3r", password: "123"})
-//   if (databaseData.some(u => u.login === user.login)) {
-//     console.log(`User with login ${user.login} already exists!!!`)
-//     return databaseData
-//   }
-//   databaseData.push(user)
-//   return databaseData
-// })
+for (const controller of controllers) {
+  controller(server)
+}
