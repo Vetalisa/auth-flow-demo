@@ -14,7 +14,7 @@ const authController = (server) => {
     const users = await databaseService.getFromDatabase("users")
     
     if (users.find(u => u.login === userRawData.login)) {
-      res.statusCode = 400
+      res.statusCode = 400 // Unacceptable
       res.send(`User ${userRawData.login} already exists!`)
       return
     }

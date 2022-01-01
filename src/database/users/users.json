@@ -43,5 +43,14 @@
     "lastName": "Default Last Name",
     "sex": null,
     "age": null
+  },
+  {
+    "id": 1640959917725,
+    "login": "Vetalisa",
+    "password": "123",
+    "firstName": "Default Name",
+    "lastName": "Default Last Name",
+    "sex": null,
+    "age": null
   }
 ]

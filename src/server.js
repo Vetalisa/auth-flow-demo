@@ -7,6 +7,7 @@ const port = process.env.SERVER_PORT ?? "3030"
 
 const server = express()
 server.use(bodyParser.json())
+server.use(express.static(__dirname + "/pages"))
 
 server.listen(port, () => {
   console.log(`Server is running on localhost:${port}`)
