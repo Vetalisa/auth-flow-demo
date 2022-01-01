@@ -52,5 +52,23 @@
     "lastName": "Default Last Name",
     "sex": null,
     "age": null
+  },
+  {
+    "id": 1641043527963,
+    "login": "Rosik",
+    "password": "123",
+    "firstName": "Default Name",
+    "lastName": "Default Last Name",
+    "sex": null,
+    "age": null
+  },
+  {
+    "id": 1641043645770,
+    "login": "Rosik2",
+    "password": "123",
+    "firstName": "Default Name",
+    "lastName": "Default Last Name",
+    "sex": null,
+    "age": null
   }
 ]

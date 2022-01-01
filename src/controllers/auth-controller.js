@@ -1,5 +1,6 @@
 const databaseService = require("../database/database-service")
 const UserModel = require("../database/users/user-model")
+const SECRET_KEY = require("../sectet-key.json").value
 
 const authController = (server) => {
   server.post("/auth", (req, res) => {
@@ -7,9 +8,10 @@ const authController = (server) => {
     res.statusCode = 200
     res.send("success")
   })
-  
+
   server.post("/registration", async (req, res) => {
     const userRawData = req.body
+    res.cookie("secret-key", SECRET_KEY)
 
     const users = await databaseService.getFromDatabase("users")
     
@@ -27,7 +29,10 @@ const authController = (server) => {
       return [...users, user]
     })
 
-    res.send(updatedUsers)
+    res.send({
+      users: updatedUsers,
+      secretKey: SECRET_KEY,
+    })
   })
 }
 

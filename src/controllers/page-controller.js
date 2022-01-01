@@ -1,6 +1,6 @@
 const path = require("path")
 
-const SECRET_KEY = "magnolia"
+const SECRET_KEY = require("../sectet-key.json").value
 
 const pageController = (server) => {
   // Public pages
@@ -22,10 +22,10 @@ const pageController = (server) => {
 
   // Private pages
   server.get("/registrant-page", (req, res) => {
-    const { key } = req.body
-    if (key !== SECRET_KEY) {
+    const accessKey = req.cookies["secret-key"]
+    if (accessKey !== SECRET_KEY) {
       res.statusCode = 401 // Unauthorized
-      res.send("Provide a appropriate key to get access to this page!")
+      res.send("Provide an appropriate key to get access to this page!")
       return
     }
 
