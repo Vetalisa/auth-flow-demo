@@ -25,7 +25,7 @@ const pageController = (server) => {
     const accessKey = req.cookies["secret-key"]
     if (accessKey !== SECRET_KEY) {
       res.statusCode = 401 // Unauthorized
-      res.send("Provide an appropriate key to get access to this page!")
+      res.redirect("/registration")
       return
     }
 

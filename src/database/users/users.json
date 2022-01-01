@@ -70,5 +70,14 @@
     "lastName": "Default Last Name",
     "sex": null,
     "age": null
+  },
+  {
+    "id": 1641044528737,
+    "login": "Rosa333",
+    "password": "123",
+    "firstName": "Default Name",
+    "lastName": "Default Last Name",
+    "sex": null,
+    "age": null
   }
 ]
