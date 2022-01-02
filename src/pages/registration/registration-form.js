@@ -32,23 +32,18 @@ const onSubmit = (e) => {
   sendCredential(credentials)
     .then(response => {
       if (response.ok) {
-        return response.json()
+        alert("You are registered!")
+        window.location.href = response.url
       } else {
-        throw response.text()
+        response.text()
+          .then(text => {
+            alert(text)
+            login.value = ""
+            password.value = ""
+            passwordRepeat.value = ""
+            login.focus()
+          })
       }
-    })
-    .then((updatedUsers) => {
-      alert("You are registered!")
-      window.location.pathname = "/"
-    })
-    .catch(errorMessage => {
-      errorMessage.then(text => {
-        alert(text)
-        login.value = ""
-        password.value = ""
-        passwordRepeat.value = ""
-        login.focus()
-      })
     })
 }
 

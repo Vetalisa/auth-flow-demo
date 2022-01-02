@@ -10,7 +10,6 @@ const authController = (server) => {
 
   server.post("/registration", async (req, res) => {
     const userRawData = req.body
-    res.cookie("secret-key", SECRET_KEY)
 
     const users = await databaseService.getFromDatabase("users")
     
@@ -20,18 +19,19 @@ const authController = (server) => {
       return
     }
 
-    const updatedUsers = await databaseService.accessDatabase("users", (users) => {
-      const user = new UserModel({
-        login: userRawData.login,
-        password: userRawData.password,
-      })
+    const user = new UserModel({
+      login: userRawData.login,
+      password: userRawData.password,
+    })
+
+    await databaseService.accessDatabase("users", (users) => {
       return [...users, user]
     })
 
-    res.send({
-      users: updatedUsers,
-      secretKey: SECRET_KEY,
-    })
+    res.cookie("secret-key", SECRET_KEY)
+    res.cookie("user-id", user.id)
+
+    res.redirect("/profile")
   })
 
   server.post("/login", async (req, res) => {
@@ -50,6 +50,12 @@ const authController = (server) => {
     res.cookie("secret-key", SECRET_KEY)
     res.cookie("user-id", user.id)
     res.redirect("/profile")
+  })
+
+  server.post("/logout", async (req, res) => {
+    res.cookie("secret-key", "")
+    res.cookie("user-id", "")
+    res.redirect("/")
   })
 }
 

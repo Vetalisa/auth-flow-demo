@@ -1,3 +1,4 @@
+const logoutButton = document.querySelector("#logout-button")
 const firstName = document.querySelector("#first-name")
 const lastName = document.querySelector("#last-name")
 const sex = document.querySelector("#sex")
@@ -5,15 +6,11 @@ const age = document.querySelector("#age")
 const newPassword = document.querySelector("#new-password")
 const editSubmitButton = document.querySelector("#edit-submit-button")
 
-const fetchUserFormData = () => {
-  return fetch("/user-form-data")
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        alert("Error!")
-      }
-    })
+const fetchUserFormData = async () => {
+  const response = await fetch("/user-form-data")
+  if (!response.ok) return alert("Error!")
+  const user = await response.json()
+  return user
 }
 
 const initializeFormFields = async () => {
@@ -25,6 +22,16 @@ const initializeFormFields = async () => {
 }
 
 initializeFormFields()
+
+logoutButton.addEventListener("click", async (e) => {
+  e.preventDefault()
+  const response = await fetch("/logout", { method: "POST" })
+  if (response.ok) {
+    window.location.href = response.url
+  } else {
+    alert("Error while logout!")
+  }
+})
 
 editSubmitButton.addEventListener("click", (e) => {
   e.preventDefault()
