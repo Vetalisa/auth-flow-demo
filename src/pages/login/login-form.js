@@ -2,6 +2,16 @@ const submitButton = document.querySelector("#submit-button")
 const login = document.querySelector("#login")
 const password = document.querySelector("#password")
 
+const sendCredential = (credentials) => {
+  return fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(credentials)
+  })
+}
+
 const onSubmit = (e) => {
   e.preventDefault()
 
@@ -22,8 +32,14 @@ const onSubmit = (e) => {
     password: password.value,
   }
 
-  alert("You are logged in!")
-  window.location.pathname = "/"
+  sendCredential(credentials)
+    .then(response => {
+      if (response.ok) {
+        window.location.href = response.url
+      } else {
+        alert("Error!")
+      }
+    })
 }
 
 submitButton.addEventListener("click", onSubmit)

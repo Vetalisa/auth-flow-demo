@@ -4,7 +4,6 @@ const SECRET_KEY = require("../sectet-key.json").value
 
 const authController = (server) => {
   server.post("/auth", (req, res) => {
-    console.log("POST /auth", JSON.stringify(req.body, null, 2))
     res.statusCode = 200
     res.send("success")
   })
@@ -33,6 +32,24 @@ const authController = (server) => {
       users: updatedUsers,
       secretKey: SECRET_KEY,
     })
+  })
+
+  server.post("/login", async (req, res) => {
+    const credentials = req.body
+    const { login, password } = credentials
+
+    const users = await databaseService.getFromDatabase("users")
+    const user = users.find(u => u.login === login && u.password === password)
+
+    if (!user) {
+      res.statusCode = 400 // Unacceptable
+      res.send("Wrong credentials!")
+      return
+    }
+
+    res.cookie("secret-key", SECRET_KEY)
+    res.cookie("user-id", user.id)
+    res.redirect("/profile")
   })
 }
 

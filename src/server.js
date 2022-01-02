@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser")
 
 const pageController = require("./controllers/page-controller")
 const authController = require("./controllers/auth-controller")
+const userControoler = require("./controllers/user-controller")
 
 const port = process.env.SERVER_PORT ?? "3030"
 
@@ -19,8 +20,14 @@ server.listen(port, () => {
 const controllers = [
   pageController,
   authController,
+  userControoler,
 ]
 
-for (const controller of controllers) {
-  controller(server)
+// Creator
+const runControllers = (controllers) => {
+  for (const controller of controllers) {
+    controller(server)
+  }
 }
+
+runControllers(controllers)

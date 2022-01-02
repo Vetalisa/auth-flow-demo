@@ -21,15 +21,16 @@ const pageController = (server) => {
   })
 
   // Private pages
-  server.get("/registrant-page", (req, res) => {
+  server.get("/profile", (req, res) => {
     const accessKey = req.cookies["secret-key"]
+
     if (accessKey !== SECRET_KEY) {
       res.statusCode = 401 // Unauthorized
       res.redirect("/registration")
       return
     }
 
-    res.sendFile(path.join(__dirname, "../pages/registrant/registrant-page.html"))
+    res.sendFile(path.join(__dirname, "../pages/profile/profile-page.html"))
   })
 }
 
