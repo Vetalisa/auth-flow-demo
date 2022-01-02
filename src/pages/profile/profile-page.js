@@ -21,8 +21,6 @@ const initializeFormFields = async () => {
   age.value = user.age
 }
 
-initializeFormFields()
-
 logoutButton.addEventListener("click", async (e) => {
   e.preventDefault()
   const response = await fetch("/logout", { method: "POST" })
@@ -33,6 +31,28 @@ logoutButton.addEventListener("click", async (e) => {
   }
 })
 
-editSubmitButton.addEventListener("click", (e) => {
+editSubmitButton.addEventListener("click", async (e) => {
   e.preventDefault()
+
+  const newUserData = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    sex: sex.value,
+    age: age.value,
+    newPassword: newPassword.value,
+  }
+
+  const response = await fetch("/user-edit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUserData),
+  })
+
+  if (!response.ok) return alert("Something went wrong!")
+
+  alert("Updated user profile!")
 })
+
+initializeFormFields()
