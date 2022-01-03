@@ -2,9 +2,8 @@
   "name": "authentication-flow",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
   "scripts": {
-    "server": "node src/server.js"
+    "server": "node src/server/index.js"
   },
   "author": "",
   "license": "ISC",
