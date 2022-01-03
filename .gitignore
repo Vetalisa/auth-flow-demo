@@ -1,2 +1,4 @@
-node_modules
-src/database/users/users.json
+/node_modules
+/client/build
+/server/src/database/users/users.json
+/server/src/database/posts/posts.json

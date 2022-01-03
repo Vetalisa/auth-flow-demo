@@ -5,7 +5,7 @@ const SECRET_KEY = require("../sectet-key.json").value
 const pageController = (server) => {
   // Public pages
   server.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../pages/main/main-page.html"))
+    res.sendFile(path.resolve(__dirname, "../pages/main/main-page.html"))
   })
 
   server.get("/registration", (req, res) => {
