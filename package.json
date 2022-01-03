@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "rest-server": "node server/src/index.js"
+    "rest-server": "node server/src/index.js",
+    "client/build": "webpack build --config ./client/webpack.config.js"
   },
   "author": "",
   "license": "ISC",

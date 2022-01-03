@@ -1,7 +1,7 @@
 const path = require("path")
 
 const webpackConfig = {
-  entry: "./src/index.jsx",
+  entry: path.resolve(__dirname, "./src/index.jsx"),
   output: {
     // filename: "main.js", // by default
     path: path.resolve(__dirname, "build")
