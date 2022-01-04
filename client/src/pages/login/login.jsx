@@ -2,10 +2,13 @@ import React from "react"
 import { Link } from "wouter"
 import locationProvider from "../../providers/location.provider"
 
+// Information Expert
 class LoginPage extends React.Component {
   state = {
-    login: "",
-    password: "",
+    form: {
+      login: "",
+      password: "",
+    }
   }
 
   sendCredentials = (credentials) => {
@@ -18,30 +21,27 @@ class LoginPage extends React.Component {
     })
   }
 
-  onLoginChange = (e) => {
-    this.setState({ login: e.target.value })
-  }
-
-  onPasswordChange = (e) => {
-    this.setState({ password: e.target.value })
+  onFormChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ form: { ...this.state.form, [name]: value } })
   }
 
   onSubmit = async (e) => {
     e.preventDefault()
 
-    if (this.state.login === "") {
+    if (this.state.form.login === "") {
       alert("Provide a login!")
       return
     }
 
-    if (this.state.password === "") {
+    if (this.state.form.password === "") {
       alert("Provide a password!")
       return
     }
 
     const credentials = {
-      login: this.state.login,
-      password: this.state.password,
+      login: this.state.form.login,
+      password: this.state.form.password,
     }
 
     const response = await this.sendCredentials(credentials)
@@ -64,16 +64,18 @@ class LoginPage extends React.Component {
             <p>Login</p>
             <input
               type="text"
-              value={this.state.login}
-              onChange={this.onLoginChange}
+              name="login"
+              value={this.state.form.login}
+              onChange={this.onFormChange}
             />
           </label>
           <label>
             <p>Password</p>
             <input
               type="password"
-              value={this.state.password}
-              onChange={this.onPasswordChange}
+              name="password"
+              value={this.state.form.password}
+              onChange={this.onFormChange}
             />
           </label>
           <button onClick={this.onSubmit}>
