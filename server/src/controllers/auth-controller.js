@@ -49,13 +49,13 @@ const authController = (server) => {
 
     res.cookie("secret-key", SECRET_KEY)
     res.cookie("user-id", user.id)
-    res.redirect("/profile")
+    res.send("success")
   })
 
   server.post("/logout", async (req, res) => {
     res.cookie("secret-key", "")
     res.cookie("user-id", "")
-    res.redirect("/")
+    res.send("success")
   })
 }
 
