@@ -17,11 +17,16 @@ const webpackConfig = {
             presets: ["@babel/preset-env", "@babel/preset-react"],
           }
         },
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader"],
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".css"],
   }
 }
 

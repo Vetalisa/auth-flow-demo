@@ -4,12 +4,12 @@ import { Link } from "wouter"
 class MainPage extends React.Component {
   render () {
     return (
-      <main>
+      <main className="page-container">
         <h1>The Main Page</h1>
         <p>Hello!</p>
-        <Link href="/login">Go to Login page</Link><br />
-        <Link href="/register">Go to Register page</Link><br />
-        <Link href="/profile">Go to Profile page</Link><br />
+        <Link href="/login">Go to Login page</Link>
+        <Link href="/register">Go to Register page</Link>
+        <Link href="/profile">Go to Profile page</Link>
       </main>
     )
   }
