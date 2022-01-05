@@ -8,7 +8,7 @@ const authController = (server) => {
     res.send("success")
   })
 
-  server.post("/registration", async (req, res) => {
+  server.post("/register", async (req, res) => {
     const userRawData = req.body
 
     const users = await databaseService.getFromDatabase("users")
@@ -31,7 +31,7 @@ const authController = (server) => {
     res.cookie("secret-key", SECRET_KEY)
     res.cookie("user-id", user.id)
 
-    res.redirect("/profile")
+    res.send("success")
   })
 
   server.post("/login", async (req, res) => {
